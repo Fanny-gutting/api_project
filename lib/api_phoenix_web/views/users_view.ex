@@ -13,7 +13,7 @@ defmodule ApiPhoenixWeb.UsersView do
   def render("users.json", %{users: users}) do
     %{
       id: users.id,
-       username: users. username,
+      username: users.username,
       email: users.email
     }
   end

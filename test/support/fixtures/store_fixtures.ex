@@ -11,7 +11,7 @@ defmodule ApiPhoenix.StoreFixtures do
     {:ok, users} =
       attrs
       |> Enum.into(%{
-         username: "some  username",
+        username: "some  username",
         email: "some email"
       })
       |> ApiPhoenix.Store.create_users()

@@ -8,7 +8,7 @@ defmodule ApiPhoenix.StoreTest do
 
     import ApiPhoenix.StoreFixtures
 
-    @invalid_attrs %{" username": nil, email: nil}
+    @invalid_attrs %{"username": nil, email: nil}
 
     test "list_users/0 returns all users" do
       users = users_fixture()
@@ -21,10 +21,10 @@ defmodule ApiPhoenix.StoreTest do
     end
 
     test "create_users/1 with valid data creates a users" do
-      valid_attrs = %{" username": "some  username", email: "some email"}
+      valid_attrs = %{"username": "some  username", email: "some email"}
 
       assert {:ok, %Users{} = users} = Store.create_users(valid_attrs)
-      assert users. username == "some  username"
+      assert users.username == "some  username"
       assert users.email == "some email"
     end
 
@@ -34,10 +34,10 @@ defmodule ApiPhoenix.StoreTest do
 
     test "update_users/2 with valid data updates the users" do
       users = users_fixture()
-      update_attrs = %{" username": "some updated  username", email: "some updated email"}
+      update_attrs = %{"username": "some updated  username", email: "some updated email"}
 
       assert {:ok, %Users{} = users} = Store.update_users(users, update_attrs)
-      assert users. username == "some updated  username"
+      assert users.username == "some updated  username"
       assert users.email == "some updated email"
     end
 

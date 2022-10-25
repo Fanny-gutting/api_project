@@ -10,12 +10,16 @@ defmodule ApiPhoenixWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :csrf do
+    plug :protect_from_forgery
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", ApiPhoenixWeb do
-    pipe_through :browser
+    pipe_through [:browser, :csrf]
 
     get "/", PageController, :index
     resources "/users", UsersController, except: [:new, :edit]
@@ -55,3 +59,34 @@ defmodule ApiPhoenixWeb.Router do
     end
   end
 end
+# defmodule Foo.Router do
+#   use Foo.Web, :router
+
+#   pipeline :browser do
+#     plug :accepts, ["html"]
+#     plug :fetch_session
+#     plug :fetch_flash
+#     #plug :protect_from_forgery - move this
+#   end
+
+#   pipeline :csrf do
+#     plug :protect_from_forgery # to here
+#   end
+
+#   pipeline :api do
+#     plug :accepts, ["json"]
+#   end
+
+#   scope "/", Foo do
+#     pipe_through [:browser, :csrf] # Use both browser and csrf pipelines
+
+#     get "/", PageController, :index
+#   end
+
+#   scope "/", Foo do
+#     pipe_through :browser # Use only the browser pipeline
+
+#     get "/facebook", PageController, :index #You can use the same controller and actions if you like
+#   end
+
+# end

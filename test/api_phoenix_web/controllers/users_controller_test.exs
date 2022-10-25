@@ -6,14 +6,14 @@ defmodule ApiPhoenixWeb.UsersControllerTest do
   alias ApiPhoenix.Store.Users
 
   @create_attrs %{
-     username: "some  username",
+    username: "some  username",
     email: "some email"
   }
   @update_attrs %{
-     username: "some updated  username",
+    username: "some updated  username",
     email: "some updated email"
   }
-  @invalid_attrs %{" username": nil, email: nil}
+  @invalid_attrs %{"username": nil, email: nil}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -35,7 +35,7 @@ defmodule ApiPhoenixWeb.UsersControllerTest do
 
       assert %{
                "id" => ^id,
-               " username" => "some  username",
+               "username" => "some  username",
                "email" => "some email"
              } = json_response(conn, 200)["data"]
     end
@@ -57,7 +57,7 @@ defmodule ApiPhoenixWeb.UsersControllerTest do
 
       assert %{
                "id" => ^id,
-               " username" => "some updated  username",
+               "username" => "some updated  username",
                "email" => "some updated email"
              } = json_response(conn, 200)["data"]
     end
