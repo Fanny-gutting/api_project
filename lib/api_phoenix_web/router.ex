@@ -6,12 +6,8 @@ defmodule ApiPhoenixWeb.Router do
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {ApiPhoenixWeb.LayoutView, :root}
-    plug :protect_from_forgery
+    # plug :protect_from_forgery
     plug :put_secure_browser_headers
-  end
-
-  pipeline :csrf do
-    plug :protect_from_forgery
   end
 
   pipeline :api do
@@ -19,10 +15,12 @@ defmodule ApiPhoenixWeb.Router do
   end
 
   scope "/", ApiPhoenixWeb do
-    pipe_through [:browser, :csrf]
+    pipe_through :browser
 
     get "/", PageController, :index
     resources "/users", UsersController, except: [:new, :edit]
+    resources "/clocks", ClocksController, except: [:new, :edit]
+    resources "/workingtimes", WorkingtimesController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.
@@ -59,34 +57,3 @@ defmodule ApiPhoenixWeb.Router do
     end
   end
 end
-# defmodule Foo.Router do
-#   use Foo.Web, :router
-
-#   pipeline :browser do
-#     plug :accepts, ["html"]
-#     plug :fetch_session
-#     plug :fetch_flash
-#     #plug :protect_from_forgery - move this
-#   end
-
-#   pipeline :csrf do
-#     plug :protect_from_forgery # to here
-#   end
-
-#   pipeline :api do
-#     plug :accepts, ["json"]
-#   end
-
-#   scope "/", Foo do
-#     pipe_through [:browser, :csrf] # Use both browser and csrf pipelines
-
-#     get "/", PageController, :index
-#   end
-
-#   scope "/", Foo do
-#     pipe_through :browser # Use only the browser pipeline
-
-#     get "/facebook", PageController, :index #You can use the same controller and actions if you like
-#   end
-
-# end

@@ -3,7 +3,7 @@ defmodule ApiPhoenix.Store.Users do
   import Ecto.Changeset
 
   schema "users" do
-    field :"username", :string
+    field :username, :string
     field :email, :string
 
     timestamps()
@@ -12,7 +12,7 @@ defmodule ApiPhoenix.Store.Users do
   @doc false
   def changeset(users, attrs) do
     users
-    |> cast(attrs, [:"username", :email])
-    |> validate_required([:"username", :email])
+    |> cast(attrs, [:username, :email])
+    |> validate_required([:username, :email])
   end
 end

@@ -18,4 +18,34 @@ defmodule ApiPhoenix.StoreFixtures do
 
     users
   end
+
+  @doc """
+  Generate a clocks.
+  """
+  def clocks_fixture(attrs \\ %{}) do
+    {:ok, clocks} =
+      attrs
+      |> Enum.into(%{
+        status: true,
+        time: ~N[2022-10-24 12:05:00]
+      })
+      |> ApiPhoenix.Store.create_clocks()
+
+    clocks
+  end
+
+  @doc """
+  Generate a workingtimes.
+  """
+  def workingtimes_fixture(attrs \\ %{}) do
+    {:ok, workingtimes} =
+      attrs
+      |> Enum.into(%{
+        end: ~N[2022-10-25 11:05:00],
+        start: ~N[2022-10-25 11:05:00]
+      })
+      |> ApiPhoenix.Store.create_workingtimes()
+
+    workingtimes
+  end
 end
